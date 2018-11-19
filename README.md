@@ -24,29 +24,35 @@ A sub-folder called *zdata* contains datasets - either in csv, pickle or hdf. Th
 
 ### 1. Get a list of active NSE equity option
 
-STATUS: Manually done
+STATUS: Complete
 
-Data from https://www.nseindia.com/products/content/derivatives/equities/fo_underlying_home.htm in the following steps:
-1. Copy and paste to spreadsheet
-2. Copy the 'Symbol' column to notepad++. The first row should be 'Symbol'
-3. Delete index symbols
-4. Store the file as *raw_equity.csv*
+This program prepares dataframes for NSE equity and indexes and pickles them into:
+*df_nse_eq_symbols.pkl* for Equity symbols
+*df_nse_idx_symbols.pkl* for Index symbols
+
+<b>*Note*</b>
+
+1. Some Index symbols in IBKR is not available in NSE
+2. To check availability of symbols in NSE websites, refer: https://www.nseindia.com/products/content/derivatives/equities/fo_underlying_home.htm
 
 ### 2. NSE option chain extraction
 
-STATUS: Completed
+STATUS: Complete
 
-This program extracts the expiries and option chain info from NSE website, based on *zdata/_raw_equity.csv*
+This program extracts the expiries and option chain info from NSE website, based on:
+   *zdata/df_nse_eq_symbols.pkl*
+   *zdata/df_nse_idx_symbols.pkl
 
-The dataframe generated is pickled into *zdata/nse_options.pkl*.
-
-Good equity and index symbols are stored in *zdata/nse_idx_symbols.csv* and *zdata/nse_eq_symbols.csv*
+The dataframe generated is pickled into *zdata/df_nse_options.pkl*.
 
 ### 3. Get underlying's details
 
-STATUS: Completed
+STATUS: Incomplete
 
-This program extracts the underlying's details and pickles them in *zdata/underlying_df.pkl*
+To-do:
+1. Separate equity and index underlying
+
+This program extracts the underlying's details and pickles them in *zdata/df_underlying.pkl*
 
 ### 4. Store historical data for computing standard deviation
 
