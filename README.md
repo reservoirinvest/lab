@@ -40,11 +40,11 @@ STATUS: Complete
 
 This program extracts the expiries and option chain info from NSE website, based on:
    *zdata/df_nse_eq_symbols.pkl*
-   *zdata/df_nse_idx_symbols.pkl
+   *zdata/df_nse_idx_symbols.pkl*
 
 The dataframe generated is pickled into *zdata/df_nse_options.pkl*.
 
-### 3. Get underlying's details
+### 3. Get underlying's Margins, Lots and Price
 
 STATUS: Incomplete
 
