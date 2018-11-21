@@ -3,12 +3,11 @@
 Make self-sufficient programs for US and Indian options.
 
 # NSE
-1. Get a list of active NSE options
+1. Get a list of NSE options
 2. Extract the option chains
-3. Get the underlying's details
-4. Store historical ohlc for standard deviation
-5. Get the margins
-6. Prepare dataframe with option chain, PoP (from standard deviation), RoM (from margin)
+3. Get the margins, lots and price for the underlyings 
+4. Store historical ohlc for standard deviation of underlyings
+5. Prepare dataframe with option chain, PoP (from standard deviation), RoM (from margin)
 7. Make a target list of option orders
 8. Place the orders
 9. Extract existing positions
@@ -61,4 +60,10 @@ STATUS: In-progress
 This program extracts OHLC by date for underlyings and pickles them in *zdata/ohlc.pkl*
 
 
+
+
+## Appendix
+The following programs have been archived. It has some good code for future reference or backup.
+1. Get margins from NSE web-site data
+2. Scrape from NSE the equity underlying details into a dataframe (good bs4 + json implementation)
 
