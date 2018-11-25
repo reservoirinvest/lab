@@ -4,8 +4,8 @@ Make self-sufficient programs for US and Indian options.
 
 # NSE
 1. Get a list of NSE options
-2. Extract the option chains
-3. Get the margins, lots and price for the underlyings 
+2. Extract the option chains with underlying's price
+3. Get the margins and lots for the underlyings 
 4. Store historical ohlc for standard deviation of underlyings
 5. Prepare dataframe with option chain, PoP (from standard deviation), RoM (from margin)
 7. Make a target list of option orders
@@ -23,7 +23,7 @@ A sub-folder called *zdata* contains datasets - either in csv, pickle or hdf. Th
 
 ### 1. Get a list of active NSE equity option
 
-STATUS: Complete
+STATUS: Completed
 
 This program prepares dataframes for NSE equity and indexes and pickles them into:
 *df_nse_eq_symbols.pkl* for Equity symbols
@@ -34,9 +34,9 @@ This program prepares dataframes for NSE equity and indexes and pickles them int
 1. Some Index symbols in IBKR is not available in NSE
 2. To check availability of symbols in NSE websites, refer: https://www.nseindia.com/products/content/derivatives/equities/fo_underlying_home.htm
 
-### 2. NSE option chain extraction
+### 2. NSE option chain extraction with underlying price
 
-STATUS: Complete
+STATUS: Completed
 
 This program extracts the expiries and option chain info from NSE website, based on:
    *zdata/df_nse_eq_symbols.pkl*
@@ -44,22 +44,25 @@ This program extracts the expiries and option chain info from NSE website, based
 
 The dataframe generated is pickled into *zdata/df_nse_options.pkl*.
 
-### 3. Get underlying's Margins, Lots and Price
+### 3. Get underlying's Margins and Lots
 
-STATUS: Incomplete
-
-To-do:
-1. Separate equity and index underlying
+STATUS: Completed
 
 This program extracts the underlying's details and pickles them in *zdata/df_underlying.pkl*
+The underlying includes equity and indexes
 
 ### 4. Store historical data for computing standard deviation
 
-STATUS: In-progress
+STATUS: Completed
 
 This program extracts OHLC by date for underlyings and pickles them in *zdata/ohlc.pkl*
 
+### 5. Assemble RoM and PoP
 
+STATUS: WIP
+
+This program assembles RoM and PoP in df_nse_options (option chain) for filtering target orders
+The output is stored in *zdata/df_rom_pop.pkl*
 
 
 ## Appendix
