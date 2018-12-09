@@ -1,4 +1,4 @@
-
+import pandas as pd
 
 #***      Function to print python code in Jupyter   ****
 #________________________________________________________
@@ -31,26 +31,26 @@ def display_py(code):
 
 #***      Function to get historical data     *****
 #___________________________________________________
-def get_hist(contract, duration):
+def get_hist(ib, contract, duration):
     '''Gets 1-day bars of contracts for the duration specified
     Args:
         (contract): contract as obj
         (duration): history days as int
     Returns: dataframe of symbol, date, ohlc, avg and volume 
     '''
-    
-    import pandas as pd
-    
+
     # Prepare the duration
     strduration = str(duration) + ' D'
-    
+
     # Extract the history
     hist = ib.reqHistoricalData(contract=contract, endDateTime='', 
-                                    durationStr=strduration, barSizeSetting='1 day',  
+                                    durationStr=strduration, barSizeSetting='1 day',
                                                 whatToShow='Trades', useRTH=True)
 
     # Make the dataframe
     cols=['ibSymbol', 'D', 'O', 'H', 'L', 'C', 'Avg', 'Vol']
-    df = pd.DataFrame([(contract.symbol, h.date, h.open, h.high, h.low,h.close, h.average, h.volume) 
+    df = pd.DataFrame([(contract.symbol, h.date, h.open, h.high, h.low, 
+                       h.close, h.average, h.volume) 
                       for h in hist], columns=cols)
     return df
+
