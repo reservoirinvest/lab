@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 #***      Function to print python code in Jupyter   ****
 #________________________________________________________
@@ -100,4 +101,7 @@ def getprice(ib, contract):
 
     close = [catch(lambda: b.close) for b in bars]
     
-    return close[0]
+    try:
+        return close[0]
+    except Exception: 
+        return np.nan
