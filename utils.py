@@ -29,6 +29,16 @@ def display_py(code):
 
     return ipython_code
 
+#***   Error catching for list comprehension ***
+#_______________________________________________
+
+def catch(func, handle=lambda e : e, *args, **kwargs):
+    '''List comprehension error catcher'''
+    try:
+        return func(*args, **kwargs)
+    except Exception as e:
+        np.nan
+
 #***      Function to get historical data     *****
 #___________________________________________________
 def get_hist(ib, contract, duration):
@@ -54,3 +64,40 @@ def get_hist(ib, contract, duration):
                       for h in hist], columns=cols)
     return df
 
+#***         Function to get volatilities     *****
+#__________________________________________________
+
+def maxvol(ib, contract):
+    '''Gets maximum volatailty
+       Args:
+          (ib) as object for keeping ibkr connection
+          (contract) as object
+       Returns: maxvol as float - maximum of 12 month's HV and IV '''
+    bars1 = ib.reqHistoricalData(contract, endDateTime='', durationStr='12 M',
+            barSizeSetting='1 day', whatToShow='OPTION_IMPLIED_VOLATILITY', useRTH=True)
+    bars2 = ib.reqHistoricalData(contract, endDateTime='', durationStr='12 M',
+            barSizeSetting='1 day', whatToShow='HISTORICAL_VOLATILITY', useRTH=True)
+    maxvol = max([b.close for b in bars1]+[b.close for b in bars2])
+    return maxvol
+
+#***  Get the underlying's price
+def getprice(ib, contract):
+    '''Gets the price of the contract
+    Arg:
+       (ib) as object for keeping ibkr connection
+       (contract) as object
+    Returns: close priceas float'''
+    
+    bars = ib.reqHistoricalData(
+            contract,
+            endDateTime='',
+            durationStr='60 S',
+            barSizeSetting='1 secs',
+            whatToShow='TRADES',
+            useRTH=True,
+            formatDate=1,
+            keepUpToDate=True)[-1:]
+
+    close = [catch(lambda: b.close) for b in bars]
+    
+    return close[0]
