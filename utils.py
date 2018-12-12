@@ -93,13 +93,15 @@ def getprice(ib, contract):
             contract,
             endDateTime='',
             durationStr='60 S',
-            barSizeSetting='1 secs',
+            barSizeSetting='1 min',
             whatToShow='TRADES',
             useRTH=True,
             formatDate=1,
             keepUpToDate=True)[-1:]
-
+    
     close = [catch(lambda: b.close) for b in bars]
+    
+    ib.cancelHistoricalData(bars)
     
     try:
         return close[0]
