@@ -34,7 +34,16 @@ def display_py(code):
 #_______________________________________________
 
 def catch(func, handle=lambda e : e, *args, **kwargs):
-    '''List comprehension error catcher'''
+    '''List comprehension error catcher
+    Args: 
+        (func) as the function
+         (handle) as the lambda of function
+         <*args | *kwargs> as arguments to the functions
+    Outputs:
+        output of the function | <np.nan> on error
+    Usage:
+        eggs = [1,3,0,3,2]
+        [catch(lambda: 1/egg) for egg in eggs]'''
     try:
         return func(*args, **kwargs)
     except Exception as e:
